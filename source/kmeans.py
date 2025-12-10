@@ -1,27 +1,19 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from typing import Tuple, List
 import os
+from visualization import plot_elbow_curve, plot_clusters_2d
 
 class KMeans:
-    def __init__(self, n_clusters: int = 3, max_iters: int = 300, random_state: int = 42, init_method: str = 'kmeans++'):
+    def __init__(self, n_clusters = 3, max_iters = 300, random_state = 42):
         self.n_clusters = n_clusters
         self.max_iters = max_iters
         self.random_state = random_state
-        self.init_method = init_method
         self.centroids = None
         self.labels_ = None
         self.inertia_ = None  # WCSS
         self.n_iter_ = 0
-        
-    def _initialize_centroids_random(self, X: np.ndarray) -> np.ndarray:
-        np.random.seed(self.random_state)
-        random_indices = np.random.choice(X.shape[0], self.n_clusters, replace=False)
-        return X[random_indices].copy()
     
-    def _initialize_centroids_kmeans_plus_plus(self, X: np.ndarray) -> np.ndarray:
+    def _initialize_centroids_kmeans_plus_plus(self, X):
         np.random.seed(self.random_state)
         n_samples = X.shape[0]
         
@@ -45,7 +37,7 @@ class KMeans:
                     
         return np.array(centroids)
     
-    def _assign_clusters(self, X: np.ndarray, centroids: np.ndarray) -> np.ndarray:
+    def _assign_clusters(self, X, centroids):
         n_samples = X.shape[0]
         labels = np.zeros(n_samples, dtype=int)
         
@@ -57,7 +49,7 @@ class KMeans:
             
         return labels
     
-    def _update_centroids(self, X: np.ndarray, labels: np.ndarray) -> np.ndarray:
+    def _update_centroids(self, X, labels):
         n_features = X.shape[1]
         new_centroids = np.zeros((self.n_clusters, n_features))
         
@@ -74,7 +66,7 @@ class KMeans:
                 
         return new_centroids
     
-    def _calculate_wcss(self, X: np.ndarray, labels: np.ndarray, centroids: np.ndarray) -> float:
+    def _calculate_wcss(self, X, labels, centroids):
         wcss = 0.0
         for k in range(self.n_clusters):
             cluster_points = X[labels == k]
@@ -82,16 +74,13 @@ class KMeans:
                 wcss += np.sum((cluster_points - centroids[k])**2)
         return wcss
     
-    def _has_converged(self, old_centroids: np.ndarray, new_centroids: np.ndarray, tol: float = 1e-4) -> bool:
+    def _has_converged(self, old_centroids, new_centroids, tol= 1e-4):
         return np.allclose(old_centroids, new_centroids, atol=tol)
     
-    def fit(self, X: np.ndarray):
+    def fit(self, X):
 
         # Initialize centroids
-        if self.init_method == 'kmeans++':
-            self.centroids = self._initialize_centroids_kmeans_plus_plus(X)
-        else:
-            self.centroids = self._initialize_centroids_random(X)
+        self.centroids = self._initialize_centroids_kmeans_plus_plus(X)
         
         # Iterate until convergence or max iterations
         for iteration in range(self.max_iters):
@@ -116,15 +105,15 @@ class KMeans:
         
         return self
     
-    def predict(self, X: np.ndarray) -> np.ndarray:
+    def predict(self, X):
         return self._assign_clusters(X, self.centroids)
     
-    def fit_predict(self, X: np.ndarray) -> np.ndarray:
+    def fit_predict(self, X):
         self.fit(X)
         return self.labels_
 
 
-def elbow_method(X: np.ndarray, k_range: List[int] = None, random_state: int = 42) -> Tuple[List[int], List[float]]:
+def elbow_method(X, k_range = None, random_state = 42):
 
     if k_range is None:
         k_range = list(range(2, 9))  # k = 2 to 8
@@ -132,36 +121,13 @@ def elbow_method(X: np.ndarray, k_range: List[int] = None, random_state: int = 4
     wcss_values = []
     
     for k in k_range:
-        kmeans = KMeans(n_clusters=k, random_state=random_state, init_method='kmeans++')
+        kmeans = KMeans(n_clusters=k, random_state=random_state)
         kmeans.fit(X)
         wcss_values.append(kmeans.inertia_)
     
     return k_range, wcss_values
 
-
-def plot_elbow_curve(k_values: List[int], wcss_values: List[float], save_path: str = 'results/elbow_curve.png'):
-
-    plt.figure(figsize=(10, 6))
-    plt.plot(k_values, wcss_values, 'bo-', linewidth=2, markersize=10)
-    plt.xlabel('Number of Clusters (k)', fontsize=12)
-    plt.ylabel('Within-Cluster Sum of Squares (WCSS)', fontsize=12)
-    plt.title('Elbow Method for Optimal K', fontsize=14, fontweight='bold')
-    plt.grid(True, alpha=0.3)
-    plt.xticks(k_values)
-    
-    # Add value labels on points
-    for k, wcss in zip(k_values, wcss_values):
-        plt.annotate(f'{wcss:.0f}', (k, wcss), textcoords="offset points", 
-                    xytext=(0,10), ha='center', fontsize=9)
-    
-    plt.tight_layout()
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    plt.close()
-
-
-def analyze_clusters(df: pd.DataFrame, labels: np.ndarray, centroids: np.ndarray, 
-                     feature_names: List[str]) -> pd.DataFrame:
+def analyze_clusters(df, labels, centroids, feature_names):
 
     df_with_clusters = df.copy()
     df_with_clusters['cluster'] = labels
@@ -187,7 +153,7 @@ def analyze_clusters(df: pd.DataFrame, labels: np.ndarray, centroids: np.ndarray
     return pd.DataFrame(cluster_stats)
 
 
-def name_and_interpret_clusters(cluster_stats: pd.DataFrame) -> pd.DataFrame:
+def name_and_interpret_clusters(cluster_stats):
 
     cluster_names = []
     insights = []
@@ -222,38 +188,6 @@ def name_and_interpret_clusters(cluster_stats: pd.DataFrame) -> pd.DataFrame:
     
     return cluster_stats
 
-
-def plot_clusters_2d(X: np.ndarray, labels: np.ndarray, centroids: np.ndarray, 
-                     feature_names: List[str], save_path: str = 'results/cluster_scatter.png'):
-
-    plt.figure(figsize=(12, 8))
-    
-    # Use first two features (typically price and units_sold after preprocessing)
-    colors = plt.cm.Set3(np.linspace(0, 1, len(np.unique(labels))))
-    
-    for cluster_id in np.unique(labels):
-        cluster_points = X[labels == cluster_id]
-        plt.scatter(cluster_points[:, 0], cluster_points[:, 1], 
-                   c=[colors[cluster_id]], label=f'Cluster {cluster_id}',
-                   alpha=0.6, s=100, edgecolors='black', linewidth=0.5)
-    
-    # Plot centroids
-    plt.scatter(centroids[:, 0], centroids[:, 1], 
-               c='red', marker='X', s=500, edgecolors='black', linewidth=2,
-               label='Centroids', zorder=5)
-    
-    plt.xlabel(f'{feature_names[0]} (standardized)', fontsize=12)
-    plt.ylabel(f'{feature_names[1]} (standardized)', fontsize=12)
-    plt.title('K-means Clustering: Product Segmentation', fontsize=14, fontweight='bold')
-    plt.legend(fontsize=10, loc='best')
-    plt.grid(True, alpha=0.3)
-    plt.tight_layout()
-    
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    plt.savefig(save_path, dpi=300, bbox_inches='tight')
-    plt.close()
-
-
 def main():
     
     # Load preprocessed data
@@ -275,7 +209,7 @@ def main():
     optimal_k = 4
     
     # Run K-means with optimal k
-    kmeans = KMeans(n_clusters=optimal_k, random_state=42, init_method='kmeans++')
+    kmeans = KMeans(n_clusters=optimal_k, random_state=42)
     labels = kmeans.fit_predict(X)
     
     # Analyze clusters
