@@ -181,11 +181,11 @@ All generated results (CSV files and visualizations) are saved in the `results/`
 - Cluster assignments
 - Visualization plots
 
-## Author
+## Authors
 
-Eduardo Goncalvez (Student ID: 6526311)
-Alex Waisman (Student ID: 6529880)
-Ivan Salazar (Student ID: 6237206)
+- Eduardo Goncalvez (Student ID: 6526311)
+- Alex Waisman (Student ID: 6529880)
+- Ivan Salazar (Student ID: 6237206)
 
 ## Notes for Professor
 
