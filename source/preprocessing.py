@@ -1,102 +1,165 @@
 import pandas as pd
 import numpy as np
 from scipy import stats
-import matplotlib.pyplot as plt
-import seaborn as sns
 import os
 
-df = pd.read_csv('data/product_sales.csv')
 
-missing_summary = pd.DataFrame({
-    'Column': df.columns,
-    'Missing_Count': df.isnull().sum(),
-    'Missing_Percentage': (df.isnull().sum() / len(df) * 100).round(2),
-    'Data_Type': df.dtypes
-})
+class DataPreprocessor:
 
-missing_product_names = df[df['product_name'].isnull()]
+    def __init__(self, data_path='data/product_sales.csv'):
+        self.df = pd.read_csv(data_path)
+        self.missing_summary = None
+        self.outlier_summary = {}
 
-for index, row in missing_product_names.iterrows():
-    valid_rows = df[(df['product_id'] == row['product_id']) & (df['product_name'].notnull())]
+    def analyze_missing_values(self):
+        # Store number of missing cells
+        self.missing_summary = pd.DataFrame({
+            'Column': self.df.columns,
+            'Missing_Count': self.df.isnull().sum(),
+            'Missing_Percentage': (self.df.isnull().sum() / len(self.df) * 100).round(2),
+            'Data_Type': self.df.dtypes
+        })
+        return self.missing_summary
 
-    if not valid_rows.empty:
-        df.at[index, 'product_name'] = valid_rows.iloc[0]['product_name']
-    else:
-        placeholder_name = f"Product_{row['product_id']}"
-        df.at[index, 'product_name'] = placeholder_name
+    def handle_missing_product_names(self):
+        # Sub Data Frame with missing product names
+        missing_product_names = self.df[self.df['product_name'].isnull()]
 
-numerical_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+        for index, row in missing_product_names.iterrows():
+            # Fetch rows with identical product_id and product_name
+            valid_rows = self.df[(self.df['product_id'] == row['product_id']) &
+                                (self.df['product_name'].notnull())]
 
-for col in numerical_cols:
-    missing_count = df[col].isnull().sum()
-    if missing_count > 0:
-        missing_pct = (missing_count / len(df)) * 100
+            # Replace missing cell with fetched product_name or default product_name if not found
+            if not valid_rows.empty:
+                self.df.at[index, 'product_name'] = valid_rows.iloc[0]['product_name']
+            else:
+                placeholder_name = f"Product_{row['product_id']}"
+                self.df.at[index, 'product_name'] = placeholder_name
 
-        if missing_pct < 5:
-            median_val = df[col].median()
-            df[col].fillna(median_val, inplace=True)
+    def handle_missing_numerical(self, threshold_pct=5):
+        # Create data frame with numerical features
+        numerical_cols = self.df.select_dtypes(include=[np.number]).columns.tolist()
 
-outlier_cols = ['price', 'cost', 'units_sold', 'profit', 'promotion_frequency']
+        # Track features that exceed the missing percentage threshold
+        damaged_columns = []
 
-outlier_summary = {}
+        for col in numerical_cols:
+            # Count number of missing cells in numerical data frame
+            missing_count = self.df[col].isnull().sum()
+            if missing_count > 0:
+                # Calculate percentage of missing values in column
+                missing_pct = (missing_count / len(self.df)) * 100
 
-df_no_outliers = df.copy()
+                if missing_pct < threshold_pct:
+                    # If less than threshold is missing impute missing values
+                    median_val = self.df[col].median()
+                    self.df[col].fillna(median_val, inplace=True)
+                else:
+                    damaged_columns.append(col)
 
-for col in outlier_cols:
-    Q1 = df[col].quantile(0.25)
-    Q3 = df[col].quantile(0.75)
-    IQR = Q3 - Q1
+        # Drop rows with missing values in columns that exceed missing threshold
+        if damaged_columns:
+            self.df.dropna(subset=damaged_columns, inplace=True)
 
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
+    def detect_outliers_iqr(self, columns=None):
+        if columns is None:
+            columns = ['price', 'cost', 'units_sold', 'profit', 'promotion_frequency']
 
-    outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)]
-    outlier_count = len(outliers)
-    outlier_pct = (outlier_count / len(df)) * 100
+        for col in columns:
+            # Calculate IQR
+            Q1 = self.df[col].quantile(0.25)
+            Q3 = self.df[col].quantile(0.75)
+            IQR = Q3 - Q1
 
-    outlier_summary[col] = {
-        'count': outlier_count,
-        'percentage': outlier_pct,
-        'lower_bound': lower_bound,
-        'upper_bound': upper_bound,
-        'Q1': Q1,
-        'Q3': Q3,
-        'IQR': IQR
-    }
+            # Calculate bounds for outlier detection
+            lower_bound = Q1 - 1.5 * IQR
+            upper_bound = Q3 + 1.5 * IQR
 
-for col in outlier_cols:
-    z_scores = np.abs(stats.zscore(df[col]))
-    outliers_z = df[z_scores > 3]
+            # Detect outliers
+            outliers = self.df[(self.df[col] < lower_bound) | (self.df[col] > upper_bound)]
+            outlier_count = len(outliers)
+            outlier_pct = (outlier_count / len(self.df)) * 100
 
-for col in outlier_cols:
-    lower_bound = outlier_summary[col]['lower_bound']
-    upper_bound = outlier_summary[col]['upper_bound']
+            # Create summary of outliers for feature
+            self.outlier_summary[col] = {
+                'count': outlier_count,
+                'percentage': outlier_pct,
+                'lower_bound': lower_bound,
+                'upper_bound': upper_bound,
+                'Q1': Q1,
+                'Q3': Q3,
+                'IQR': IQR
+            }
 
-    original_min = df_no_outliers[col].min()
-    original_max = df_no_outliers[col].max()
+        return self.outlier_summary
 
-    df_no_outliers[col] = df_no_outliers[col].clip(lower=lower_bound, upper=upper_bound)
+    def cap_outliers(self, columns=None):
+        if columns is None:
+            columns = ['price', 'cost', 'units_sold', 'profit', 'promotion_frequency']
 
-    capped_count = ((df[col] < lower_bound) | (df[col] > upper_bound)).sum()
+        # Create copy of df to cap outliers
+        df_no_outliers = self.df.copy()
 
-features_to_normalize = ['price', 'cost', 'units_sold', 'promotion_frequency', 'shelf_level', 'profit']
+        for col in columns:
+            lower_bound = self.outlier_summary[col]['lower_bound']
+            upper_bound = self.outlier_summary[col]['upper_bound']
 
-df_minmax = df_no_outliers.copy()
+            # Replace outliers with their respective bounds
+            df_no_outliers[col] = df_no_outliers[col].clip(lower=lower_bound, upper=upper_bound)
 
-df_zscore = df_no_outliers.copy()
+        return df_no_outliers
 
-for col in features_to_normalize:
-    min_val = df_minmax[col].min()
-    max_val = df_minmax[col].max()
-    df_minmax[f'{col}_normalized'] = (df_minmax[col] - min_val) / (max_val - min_val)
+    def standardize_zscore(self, df, columns=None):
+        if columns is None:
+            columns = ['price', 'cost', 'units_sold', 'promotion_frequency', 'shelf_level', 'profit']
 
-for col in features_to_normalize:
-    mean_val = df_zscore[col].mean()
-    std_val = df_zscore[col].std()
-    df_zscore[f'{col}_standardized'] = (df_zscore[col] - mean_val) / std_val
+        df_standardized = df.copy()
 
-df_no_outliers.to_csv('results/preprocessed_data_outliers_capped.csv', index=False)
+        # Z-score normalization
+        for col in columns:
+            mean_val = df_standardized[col].mean()
+            std_val = df_standardized[col].std()
+            df_standardized[f'{col}_standardized'] = (df_standardized[col] - mean_val) / std_val
 
-df_minmax.to_csv('results/preprocessed_data_minmax_normalized.csv', index=False)
+        return df_standardized
 
-df_zscore.to_csv('results/preprocessed_data_zscore_standardized.csv', index=False)
+    def preprocess_all(self):
+        # Analyze missing values
+        self.analyze_missing_values()
+
+        # Handle missing values
+        self.handle_missing_product_names()
+        self.handle_missing_numerical(threshold_pct=5)
+
+        # Detect outliers
+        self.detect_outliers_iqr()
+
+        # Cap outliers
+        df_capped = self.cap_outliers()
+
+        # Normalize and standardize
+        df_zscore = self.standardize_zscore(df_capped)
+
+        return df_capped, df_zscore
+
+    def save_results(self, df_capped, df_zscore, output_dir='results'):
+        os.makedirs(output_dir, exist_ok=True)
+
+        df_capped.to_csv(f'{output_dir}/preprocessed_data_outliers_capped.csv', index=False)
+        df_zscore.to_csv(f'{output_dir}/preprocessed_data_zscore_standardized.csv', index=False)
+
+
+def main():
+    # Initialize preprocessor
+    preprocessor = DataPreprocessor('data/product_sales.csv')
+
+    # Run all preprocessing steps
+    df_capped, df_zscore = preprocessor.preprocess_all()
+
+    # Save results
+    preprocessor.save_results(df_capped, df_zscore)
+
+
+if __name__ == "__main__":
+    main()
