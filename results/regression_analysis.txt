@@ -1,0 +1,31 @@
+============================================================
+REGRESSION ANALYSIS RESULTS
+============================================================
+
+Target Variable: profit
+Features Used: price, cost, units_sold, promotion_frequency, shelf_level
+Training Set Size: 140
+Test Set Size: 60
+
+============================================================
+MODEL COMPARISON
+============================================================
+
+                           Model   Train_MSE    Test_MSE  Train_MAE  Test_MAE  Train_R2  Test_R2  Overfitting
+Polynomial Regression (degree=3)  141.587209 2312.637306   8.180844 19.740176  0.996100 0.931984     0.064116
+Polynomial Regression (degree=2)  399.418833 2501.583087  11.734012 20.479740  0.988998 0.926427     0.062571
+    Ridge Regression (alpha=1.0) 9956.736915 7975.465051  69.278706 64.539461  0.725746 0.765438    -0.039691
+               Linear Regression 9427.980424 8927.037744  71.911010 74.892540  0.740311 0.737451     0.002859
+
+============================================================
+BEST MODEL: Polynomial Regression (degree=3)
+============================================================
+
+Test R² Score: 0.9320
+Test MSE: 2312.64
+Test MAE: 19.74
+
+INTERPRETATION:
+- The Polynomial Regression (degree=3) shows excellent performance (R²=0.9320)
+- No significant overfitting detected (gap=0.0641)
+- Polynomial features improve performance by 18.90%

@@ -1,0 +1,5 @@
+Cluster,Count,Avg_Price,Avg_Units_Sold,Avg_Profit,Avg_Promotion_Freq,Avg_Cost,Total_Profit,Total_Units_Sold,Cluster_Name,Business_Insight
+0,38,13.971907894736843,65.86842105263158,349.4965789473685,0.0,9.217434210526314,13280.870000000003,2503,Premium Specialty,"High-margin, low-volume premium products. Consider targeted marketing and ensure quality positioning."
+1,58,4.960689655172415,360.17241379310343,727.8342672413794,1.5344827586206897,2.855172413793104,42214.387500000004,20890,Mid-Range Steady Performers,Reliable products with balanced pricing and consistent sales. Maintain current strategy and monitor competition.
+2,22,2.308181818181819,648.8636363636364,715.8647727272727,1.2954545454545454,1.25,15749.025,14275,Budget Best-Sellers,"High-volume, low-price products driving revenue through quantity. Focus on maintaining stock levels and supply chain efficiency."
+3,82,6.25219512195122,212.3170731707317,490.89268292682925,0.3048780487804878,3.8585365853658535,40253.2,17410,Premium Specialty,"High-margin, low-volume premium products. Consider targeted marketing and ensure quality positioning."

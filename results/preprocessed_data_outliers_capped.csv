@@ -1,0 +1,201 @@
+product_id,product_name,category,price,cost,units_sold,promotion_frequency,shelf_level,profit
+1,Whole Milk,Dairy,3.99,2.5,450,2.0,3,670.5
+2,White Bread,Bakery,2.49,1.2,725,1.0,2,1028.0625
+3,Banana,Produce,0.59,0.35,725,0.0,2,288.0
+4,Ground Beef,Meat,5.99,3.8,320,1.0,3,700.8
+5,Orange Juice,Beverages,4.49,2.3,380,2.0,3,832.2
+6,Potato Chips,Snacks,3.29,1.8,560,2.5,2,834.4
+7,Cheddar Cheese,Dairy,6.99,4.2,280,1.0,3,781.2
+8,Product_8,Bakery,4.99,2.5,420,0.0,4,1028.0625
+9,Apple,Produce,1.29,0.7,725,1.0,1,501.5
+10,Chicken Breast,Meat,7.49,4.5,410,2.0,3,1028.0625
+11,Cola,Beverages,1.99,0.9,725,2.5,1,1028.0625
+12,Chocolate Bar,Snacks,2.49,1.3,720,2.0,2,856.8
+13,Low-Fat Yogurt,Dairy,4.29,2.6,390,1.0,3,658.1
+14,Bagels,Bakery,3.99,2.1,340,0.0,2,642.6
+15,Tomato,Produce,1.99,1.1,680,0.0,2,605.2
+16,Pork Chops,Meat,6.49,3.9,250,1.0,3,647.5
+17,Bottled Water,Beverages,0.99,0.4,725,1.0,1,855.5
+18,Pretzels,Snacks,2.99,1.5,490,2.0,2,730.1
+19,Swiss Cheese,Dairy,7.99,5.0,210,0.0,3,627.9
+20,Croissant,Bakery,2.99,1.6,380,1.0,4,528.2
+21,Orange,Produce,0.79,0.45,725,1.0,1,312.8
+22,Salmon Fillet,Meat,12.99,8.2,180,1.0,3,862.2
+23,Lemonade,Beverages,3.49,1.8,440,2.0,3,743.6
+24,Popcorn,Snacks,3.99,2.2,380,2.5,2,680.2
+25,Cottage Cheese,Dairy,4.99,3.1,290,0.0,3,548.1
+26,Muffin,Bakery,3.49,1.9,450,1.0,4,715.5
+27,Grapes,Produce,3.99,2.4,520,0.0,1,826.8
+28,Turkey Slices,Meat,8.99,5.5,270,1.0,3,942.3
+29,Iced Tea,Beverages,2.99,1.5,580,2.0,2,863.2
+30,Cookies,Snacks,4.49,2.5,490,2.0,2,975.1
+31,Parmesan Cheese,Dairy,9.99,6.3,160,0.0,4,590.4
+32,Sourdough Bread,Bakery,4.49,2.4,310,0.0,2,647.9
+33,Strawberry,Produce,4.99,3.2,410,1.0,1,733.9
+34,Bacon,Meat,6.99,4.1,380,2.0,3,1028.0625
+35,Energy Drink,Beverages,2.99,1.6,680,2.5,2,945.2
+36,Tortilla Chips,Snacks,3.49,1.9,520,2.5,2,826.8
+37,Cream Cheese,Dairy,3.99,2.3,360,1.0,3,608.4
+38,Donuts,Bakery,5.99,3.2,290,1.0,4,809.1
+39,Lettuce,Produce,1.99,1.2,720,0.0,2,568.8
+40,Ham Slices,Meat,7.99,4.8,310,1.0,3,988.9
+41,Sparkling Water,Beverages,1.49,0.7,725,1.0,1,703.1
+42,Granola Bar,Snacks,3.99,2.3,420,2.0,2,709.8
+43,Mozzarella,Dairy,5.99,3.6,340,1.0,3,813.6
+44,Ciabatta,Bakery,3.99,2.2,280,0.0,3,501.2
+45,Watermelon,Produce,5.99,3.8,290,0.0,1,635.1
+46,Lamb Chops,Meat,14.99,9.5,95,0.0,3,521.55
+47,Fruit Punch,Beverages,3.99,2.1,390,2.0,3,736.1
+48,Beef Jerky,Snacks,6.99,4.2,240,1.0,2,669.6
+49,Blue Cheese,Dairy,8.99,5.7,150,0.0,4,493.5
+50,Rye Bread,Bakery,4.99,2.8,250,0.0,2,547.5
+51,Blueberry,Produce,5.99,3.9,310,1.0,1,648.9
+52,Sausage,Meat,5.49,3.2,420,2.0,3,961.8
+53,Green Tea,Beverages,4.49,2.4,320,1.0,3,668.8
+54,Mixed Nuts,Snacks,7.99,4.9,210,1.0,2,649.9
+55,Goat Cheese,Dairy,10.99,7.2,120,0.0,4,454.8
+56,Baguette,Bakery,2.99,1.5,520,1.0,2,774.8
+57,Pineapple,Produce,4.99,3.1,380,0.0,1,717.2
+58,Ribeye Steak,Meat,15.5525,10.212500000000002,110,0.0,3,636.9
+59,Smoothie,Beverages,5.99,3.4,280,2.0,3,725.2
+60,Protein Bar,Snacks,2.99,1.7,590,2.0,2,760.1
+61,Feta Cheese,Dairy,7.49,4.6,190,0.0,3,549.1
+62,Pretzel Buns,Bakery,4.49,2.5,240,0.0,4,478.8
+63,Mango,Produce,2.99,1.9,540,1.0,1,588.6
+64,Tuna Steak,Meat,13.99,9.1,85,0.0,3,415.65
+65,Coconut Water,Beverages,3.49,1.9,410,2.0,2,651.9
+66,Rice Cakes,Snacks,3.99,2.2,340,1.0,2,608.6
+67,Brie Cheese,Dairy,11.99,7.8,105,0.0,4,439.95
+68,Focaccia,Bakery,5.49,3.1,210,0.0,3,502.9
+69,Kiwi,Produce,1.49,0.9,680,1.0,1,401.2
+70,Cod Fillet,Meat,10.99,6.8,160,1.0,3,670.4
+71,Protein Shake,Beverages,4.99,2.8,350,2.0,3,766.5
+72,Trail Mix,Snacks,6.49,3.8,280,1.0,2,753.2
+73,Ricotta Cheese,Dairy,5.99,3.5,250,0.0,3,622.5
+74,Pumpernickel,Bakery,4.99,2.7,190,0.0,2,435.1
+75,Avocado,Produce,2.49,1.5,620,1.0,2,613.8
+76,Shrimp,Meat,11.99,7.5,140,1.0,3,628.6
+77,Almond Milk,Beverages,4.49,2.5,420,2.0,3,835.8
+78,Crackers,Snacks,3.49,1.9,480,2.0,2,763.2
+79,Gouda Cheese,Dairy,8.49,5.3,175,0.0,3,558.25
+80,Multigrain Bread,Bakery,5.49,3.2,220,0.0,2,503.8
+81,Papaya,Produce,3.99,2.5,290,0.0,1,432.1
+82,Lobster Tail,Meat,15.5525,10.212500000000002,45,0.0,3,368.55
+83,Kombucha,Beverages,5.99,3.5,240,1.0,3,597.6
+84,Veggie Chips,Snacks,4.99,2.9,310,2.0,2,647.9
+85,Provolone,Dairy,6.99,4.3,220,0.0,3,591.8
+86,Flatbread,Bakery,3.99,2.1,340,1.0,3,639.6
+87,Cantaloupe,Produce,4.49,2.8,270,0.0,1,456.3
+88,Duck Breast,Meat,15.5525,10.212500000000002,65,0.0,3,421.85
+89,Product_89,Beverages,2.49,1.3,720,2.5,1,856.8
+90,Cheese Puffs,Snacks,2.99,1.6,580,2.5,2,806.2
+91,Camembert,Dairy,12.49,8.2,95,0.0,4,407.55
+92,Naan Bread,Bakery,4.99,2.8,250,0.0,4,547.5
+93,Pomegranate,Produce,5.99,3.9,210,0.0,1,438.9
+94,Venison,Meat,15.5525,10.212500000000002,50,0.0,3,389.5
+95,Oat Milk,Beverages,4.99,2.9,380,2.0,3,793.2
+96,Pita Chips,Snacks,3.99,2.3,390,2.0,2,658.1
+97,Manchego Cheese,Dairy,13.99,9.5,85,0.0,4,381.65
+98,Challah,Bakery,6.49,3.8,180,0.0,4,484.2
+99,Dragon Fruit,Produce,6.99,4.6,150,0.0,1,358.5
+100,Quail,Meat,15.5525,10.212500000000002,55,0.0,3,356.95
+101,Soy Milk,Beverages,3.99,2.2,490,2.0,3,877.1
+102,Kale Chips,Snacks,5.49,3.3,210,1.0,2,460.9
+103,Gruyere,Dairy,10.99,7.1,125,0.0,4,486.25
+104,Brioche,Bakery,5.99,3.5,230,0.0,4,572.7
+105,Starfruit,Produce,4.99,3.2,180,0.0,1,322.2
+106,Rabbit,Meat,15.5525,10.212500000000002,60,0.0,3,371.4
+107,Rice Milk,Beverages,4.49,2.6,310,1.0,3,585.9
+108,Seaweed Snack,Snacks,4.99,3.0,240,1.0,2,477.6
+109,Havarti,Dairy,7.99,5.0,190,0.0,3,568.1
+110,English Muffin,Bakery,3.49,1.8,420,1.0,2,709.8
+111,Lychee,Produce,5.99,3.9,170,0.0,1,355.3
+112,Pheasant,Meat,15.5525,10.212500000000002,48,0.0,3,359.52
+113,Cashew Milk,Beverages,5.49,3.3,280,1.0,3,612.2
+114,Wasabi Peas,Snacks,4.49,2.6,250,1.0,2,472.5
+115,Asiago,Dairy,9.49,6.1,140,0.0,3,474.6
+116,Pita Bread,Bakery,2.99,1.5,490,1.0,2,730.1
+117,Passion Fruit,Produce,4.49,2.9,220,0.0,1,349.8
+118,Ostrich,Meat,15.5525,10.212500000000002,42,0.0,3,326.58
+119,Hemp Milk,Beverages,5.99,3.7,240,1.0,3,549.6
+120,Edamame,Snacks,3.99,2.3,380,2.0,2,642.2
+121,Fontina,Dairy,8.99,5.7,165,0.0,3,542.85
+122,Tortilla,Bakery,3.99,2.1,410,1.0,2,728.9
+123,Guava,Produce,3.99,2.5,260,0.0,1,387.4
+124,Bison,Meat,15.5525,10.212500000000002,52,0.0,3,373.88
+125,Flax Milk,Beverages,5.49,3.4,260,1.0,3,543.4
+126,Hummus Chips,Snacks,4.99,2.9,290,2.0,2,605.1
+127,Roquefort,Dairy,14.99,10.2,75,0.0,4,359.25
+128,Lavash,Bakery,4.49,2.5,240,0.0,3,478.8
+129,Rambutan,Produce,6.99,4.7,130,0.0,1,297.7
+130,Elk,Meat,15.5525,10.212500000000002,38,0.0,3,321.62
+131,Macadamia Milk,Beverages,6.49,4.1,210,1.0,3,502.9
+132,Quinoa Chips,Snacks,5.49,3.3,230,1.0,2,504.7
+133,Stilton,Dairy,12.99,8.6,95,0.0,4,416.05
+134,Matzo,Bakery,3.99,2.2,310,0.0,2,554.9
+135,Persimmon,Produce,4.99,3.3,190,0.0,1,321.1
+136,Wild Boar,Meat,15.5525,10.212500000000002,40,0.0,3,327.6
+137,Pea Milk,Beverages,4.99,2.9,320,2.0,3,668.8
+138,Chickpea Puffs,Snacks,4.49,2.6,270,2.0,2,510.3
+139,Pecorino,Dairy,11.49,7.6,110,0.0,4,427.9
+140,Injera,Bakery,5.99,3.6,180,0.0,3,430.2
+141,Kumquat,Produce,5.99,4.0,140,0.0,1,278.6
+142,Kangaroo,Meat,15.5525,10.212500000000002,35,0.0,3,307.65
+143,Pistachio Milk,Beverages,6.99,4.4,190,1.0,3,491.1
+144,Lentil Chips,Snacks,4.99,2.9,260,1.0,2,543.4
+145,Taleggio,Dairy,13.49,9.1,85,0.0,4,373.15
+146,Arepa,Bakery,4.49,2.5,220,0.0,3,438.8
+147,Cherimoya,Produce,7.99,5.4,110,0.0,1,284.9
+148,Alligator,Meat,15.5525,10.212500000000002,30,0.0,3,274.7
+149,Walnut Milk,Beverages,5.99,3.7,240,1.0,3,549.6
+150,Bean Chips,Snacks,4.49,2.6,280,2.0,2,529.2
+151,Limburger,Dairy,10.99,7.3,105,0.0,4,387.45
+152,Cornbread,Bakery,3.99,2.1,340,1.0,2,642.6
+153,Longan,Produce,5.49,3.7,160,0.0,1,286.4
+154,Yak,Meat,15.5525,10.212500000000002,33,0.0,3,296.67
+155,Hazelnut Milk,Beverages,6.49,4.1,210,1.0,3,502.9
+156,Sweet Potato Chips,Snacks,4.99,2.9,290,2.0,2,605.1
+157,Raclette,Dairy,12.49,8.3,90,0.0,4,376.1
+158,Johnnycake,Bakery,4.99,2.8,210,0.0,2,459.9
+159,Salak,Produce,6.99,4.8,120,0.0,1,262.8
+160,Emu,Meat,15.5525,10.212500000000002,28,0.0,3,265.72
+161,Coconut Milk,Beverages,4.49,2.5,380,2.0,3,756.2
+162,Beet Chips,Snacks,5.49,3.3,220,1.0,2,481.8
+163,Gorgonzola,Dairy,9.99,6.5,140,0.0,3,488.6
+164,Bannock,Bakery,3.99,2.1,290,0.0,2,547.1
+165,Durian,Produce,9.99,6.9,85,0.0,1,262.65
+166,Crocodile,Meat,15.5525,10.212500000000002,25,0.0,3,249.75
+167,Product_167,Beverages,3.99,2.2,410,2.0,3,733.9
+168,Parsnip Chips,Snacks,4.99,2.9,250,1.0,2,522.5
+169,Edam,Dairy,7.99,5.1,180,0.0,3,520.2
+170,Scone,Bakery,3.49,1.8,380,1.0,4,642.2
+171,Jackfruit,Produce,8.99,6.2,95,0.0,1,265.05
+172,Rattlesnake,Meat,15.5525,10.212500000000002,20,0.0,3,215.8
+173,Tiger Nut Milk,Beverages,6.99,4.4,190,1.0,3,491.1
+174,Cassava Chips,Snacks,4.99,2.9,240,1.0,2,501.6
+175,Emmental,Dairy,8.99,5.7,160,0.0,3,526.4
+176,Crumpet,Bakery,3.99,2.2,310,1.0,2,554.9
+177,Rambai,Produce,7.99,5.5,100,0.0,1,249.0
+178,Product_178,Meat,15.5525,10.212500000000002,18,0.0,3,200.42
+179,Quinoa Milk,Beverages,5.99,3.7,240,1.0,3,549.6
+180,Plantain Chips,Snacks,3.99,2.3,350,2.0,2,591.5
+181,Jarlsberg,Dairy,9.99,6.4,135,0.0,3,484.65
+182,Farl,Bakery,4.49,2.5,240,0.0,2,478.8
+183,Mangosteen,Produce,8.99,6.3,90,0.0,1,242.1
+184,Frog Legs,Meat,15.5525,10.212500000000002,22,0.0,3,223.18
+185,Spelt Milk,Beverages,5.49,3.3,260,1.0,3,569.4
+186,Yuca Chips,Snacks,4.99,2.9,250,1.0,2,522.5
+187,Colby,Dairy,6.99,4.4,210,0.0,3,543.9
+188,Damper,Bakery,4.99,2.8,220,0.0,2,481.8
+189,Soursop,Produce,7.99,5.6,105,0.0,1,249.95
+190,Turtle,Meat,15.5525,10.212500000000002,15,0.0,3,176.85
+191,Barley Milk,Beverages,4.99,2.9,310,2.0,3,647.9
+192,Taro Chips,Snacks,5.49,3.3,230,1.0,2,504.7
+193,Wensleydale,Dairy,10.49,6.9,115,0.0,4,411.85
+194,Pandebono,Bakery,4.49,2.5,240,0.0,3,478.8
+195,Salacca,Produce,6.99,4.8,115,0.0,1,251.85
+196,Escargot,Meat,15.5525,10.212500000000002,17,0.0,3,186.83
+197,Millet Milk,Beverages,5.49,3.3,270,1.0,3,590.3
+198,Lotus Chips,Snacks,5.99,3.6,210,1.0,2,502.9
+199,Port Salut,Dairy,8.99,5.8,155,0.0,3,494.45
+200,Boule,Bakery,5.99,3.5,200,0.0,2,498.0
